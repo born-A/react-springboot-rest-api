@@ -1,5 +1,6 @@
 package com.example.springbootbasicwalmart.service;
 
+import com.example.springbootbasicwalmart.domain.customer.Address;
 import com.example.springbootbasicwalmart.domain.customer.Customer;
 import com.example.springbootbasicwalmart.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,12 @@ public class CustomerService {
         return customerList;
     }
 
+    public void updateCustomer(Long id, String email, String password, String name, String city, String street, String zipcode) {
+        Optional<Customer> findCustomer = customerRepository.findById(id);
+        Customer customer = findCustomer.get();
+        Address address = new Address(city, street, zipcode);
+        customer.updateCustomer(email, password, name, address);
+    }
 
     @Transactional
     public void deleteCustomerById(Long id) {

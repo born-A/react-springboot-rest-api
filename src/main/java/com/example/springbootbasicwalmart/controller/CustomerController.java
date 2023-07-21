@@ -6,11 +6,10 @@ import com.example.springbootbasicwalmart.dto.customers.CustomerForm;
 import com.example.springbootbasicwalmart.service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
@@ -52,5 +51,19 @@ public class CustomerController {
         model.addAttribute("customers", customers);
         return "customers/customer-list";
     }
-    
+
+    @GetMapping("/{id}")
+    public String showCustomerDetail(@PathVariable("id") Long id, Model model) {
+        Optional<Customer> findCustomer = customerService.getCustomerById(id);
+        CustomerForm customerForm = new CustomerForm();
+        model.addAttribute("customer", findCustomer);
+        model.addAttribute("customerForm", customerForm);
+        return "/customers/customer-detail";
+    }
+    @PostMapping("/edit/{id}")
+    public String updateCustomer(@PathVariable("id") Long id, @ModelAttribute("customerForm") CustomerForm customerForm) {
+        customerService.updateCustomer(id,customerForm.getEmail(), customerForm.getPassword(),customerForm.getName(), customerForm.getCity(), customerForm.getStreet(), customerForm.getZipcode());
+        return "redirect:/";
+    }
+
 }

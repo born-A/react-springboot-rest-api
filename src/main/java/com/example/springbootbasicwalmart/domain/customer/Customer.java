@@ -34,4 +34,13 @@ public class Customer {
         return customer;
     }
 
+    public Customer updateCustomer(String email, String password, String name, Address address){
+        Customer customer = new Customer();
+        customer.email = email;
+        customer.password = password;
+        customer.name = name;
+        customer.address = address;
+        return customer;
+    }
+
 }
