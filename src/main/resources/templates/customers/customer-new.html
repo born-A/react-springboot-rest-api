@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Customer 등록</title>
+</head>
+<body class="container-fluid">
+<h1>Customer 등록</h1>
+<form th:action="@{/customers/new}" method="post" th:object="${customerForm}">
+    <div class="mb-3">
+        <label for="email" class="form-label">고객 이메일</label>
+        <input th:field="*{email}" type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">비밀번호</label>
+        <input type="text" th:field="*{password}"name="password" class="form-control" id="password">
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">이름</label>
+        <input type="text" th:field="*{name}" name="name" class="form-control" id="name">
+    </div>
+    <div>
+        <label>City</label>
+        <input type="text" th:field="*{city}" class="form-control" placeholder="도시를 입력하세요" id="city">
+    </div>
+
+    <div>
+        <label>Street</label>
+        <input type="text" th:field="*{street}" class="form-control" placeholder="거리를 입력하세요" id="street">
+    </div>
+
+    <div>
+        <label>Zipcode</label>
+        <input type="text" th:field="*{zipcode}" class="form-control" placeholder="우편번호를 입력하세요" id="zipcode">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</body>

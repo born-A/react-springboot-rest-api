@@ -3,6 +3,7 @@ package com.example.springbootbasicwalmart.service;
 import com.example.springbootbasicwalmart.domain.customer.Customer;
 import com.example.springbootbasicwalmart.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    @Transactional
     public Customer addNewCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
@@ -38,7 +40,8 @@ public class CustomerService {
     }
 
 
-    public void deleteCustomer(Long id) {
+    @Transactional
+    public void deleteCustomerById(Long id) {
         customerRepository.deleteById(id);
     }
 
