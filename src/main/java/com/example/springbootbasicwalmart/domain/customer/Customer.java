@@ -1,14 +1,16 @@
 package com.example.springbootbasicwalmart.domain.customer;
 
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
+@Getter@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Customer {
 
@@ -19,28 +21,27 @@ public class Customer {
     private String password;
     private String name;
 
-    @Embedded
-    private Address address;
+    private String city;
+    private String street;
+    private String zipcode;
 
-    public Customer() {
+    public static Customer createCustomer(String email, String password, String name, String city,String street, String zipcode) {
+        return getCustomer(email, password, name, city, street, zipcode);
     }
 
-    public static Customer createCustomer(String email, String password, String name, Address address) {
+    private static Customer getCustomer(String email, String password, String name, String city, String street, String zipcode) {
         Customer customer = new Customer();
         customer.email = email;
         customer.password = password;
         customer.name = name;
-        customer.address = address;
+        customer.city =city;
+        customer.street=street;
+        customer.zipcode=zipcode;
         return customer;
     }
 
-    public Customer updateCustomer(String email, String password, String name, Address address){
-        Customer customer = new Customer();
-        customer.email = email;
-        customer.password = password;
-        customer.name = name;
-        customer.address = address;
-        return customer;
+    public Customer updateCustomer(String email, String password, String name, String city,String street, String zipcode){
+        return getCustomer(email, password, name, city, street, zipcode);
     }
 
 }

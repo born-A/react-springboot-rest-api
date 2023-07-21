@@ -4,6 +4,7 @@ import com.example.springbootbasicwalmart.domain.customer.Address;
 import com.example.springbootbasicwalmart.domain.customer.Customer;
 import com.example.springbootbasicwalmart.dto.customers.CustomerForm;
 import com.example.springbootbasicwalmart.service.CustomerService;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/customers")
+
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -38,9 +40,7 @@ public class CustomerController {
         String street = customerForm.getStreet();
         String zipcode = customerForm.getZipcode();
 
-        Address address = new Address(city, street, zipcode);
-
-        Customer newCustomer = Customer.createCustomer(email, password, name, address);
+        Customer newCustomer = Customer.createCustomer(email, password, name, city,street,zipcode);
         customerService.addNewCustomer(newCustomer);
         return "redirect:/";
     }
@@ -58,11 +58,23 @@ public class CustomerController {
         CustomerForm customerForm = new CustomerForm();
         model.addAttribute("customer", findCustomer);
         model.addAttribute("customerForm", customerForm);
-        return "/customers/customer-detail";
+        return "customers/customer-detail";
     }
-    @PostMapping("/edit/{id}")
-    public String updateCustomer(@PathVariable("id") Long id, @ModelAttribute("customerForm") CustomerForm customerForm) {
+    @GetMapping("/update/{id}")
+    public String showUpdateCustomer(@PathVariable("id") Long id,Model model) {
+        Customer findCustomer = customerService.getCustomerById(id).get();
+        model.addAttribute("customer", findCustomer);
+        return "customers/customer-update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateCustomer(@PathVariable("id") Long id,@ModelAttribute CustomerForm customerForm) {
         customerService.updateCustomer(id,customerForm.getEmail(), customerForm.getPassword(),customerForm.getName(), customerForm.getCity(), customerForm.getStreet(), customerForm.getZipcode());
+        return "redirect:/";
+    }
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam Long id){
+        customerService.deleteCustomerById(id);
         return "redirect:/";
     }
 

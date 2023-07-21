@@ -43,9 +43,15 @@ public class CustomerService {
     public void updateCustomer(Long id, String email, String password, String name, String city, String street, String zipcode) {
         Optional<Customer> findCustomer = customerRepository.findById(id);
         Customer customer = findCustomer.get();
-        Address address = new Address(city, street, zipcode);
-        customer.updateCustomer(email, password, name, address);
+        customer.setEmail(email);
+        customer.setName(name);
+        customer.setPassword(password);
+        customer.setCity(city);
+        customer.setStreet(street);
+        customer.setZipcode(zipcode);
+        customerRepository.save(customer);
     }
+
 
     @Transactional
     public void deleteCustomerById(Long id) {

@@ -31,7 +31,9 @@
                 <td th:text="${customer.getId()}">10</td>
                 <td th:text="${customer.getEmail()}">10000</td>
                 <td th:text="${customer.getName()}" />
-                <td th:text="${customer.getAddress()}">10</td>
+                <td th:text="${customer.getCity()}">10</td>
+                <td th:text="${customer.getStreet()}">10</td>
+                <td th:text="${customer.getZipcode()}">10</td>
                 <a th:href="@{/customers/{id}(id =${customer.getId()})}">상세</a>
             </tr>
             </tbody>
