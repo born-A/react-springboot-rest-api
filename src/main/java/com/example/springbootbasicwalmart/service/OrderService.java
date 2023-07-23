@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class OrderService {
     private final ItemRepository itemRepository;
 
     @Transactional
-    public Long order(Long customerId, Long itemId, int count) {
+    public Order order(Long customerId, Long itemId, int count) {
         Customer customer = customerRepository.findById(customerId).get();
         Item item = itemRepository.findById(itemId).get();
 
@@ -28,7 +30,15 @@ public class OrderService {
         Order order = Order.createOrder(customer, orderItem);
 
         orderRepository.save(order);
-        return order.getId();
+        return order;
+    }
+
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
+    }
+
+    public Order getOrderById(Long id) {
+        return orderRepository.findById(id).get();
     }
 
     @Transactional

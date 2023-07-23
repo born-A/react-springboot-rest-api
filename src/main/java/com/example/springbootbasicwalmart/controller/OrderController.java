@@ -2,6 +2,8 @@ package com.example.springbootbasicwalmart.controller;
 
 import com.example.springbootbasicwalmart.domain.customer.Customer;
 import com.example.springbootbasicwalmart.domain.item.Item;
+import com.example.springbootbasicwalmart.domain.order.Order;
+import com.example.springbootbasicwalmart.request.CreateOrderRequest;
 import com.example.springbootbasicwalmart.service.CustomerService;
 import com.example.springbootbasicwalmart.service.ItemService;
 import com.example.springbootbasicwalmart.service.OrderService;
@@ -20,25 +22,21 @@ public class OrderController {
     private final CustomerService customerService;
     private final ItemService itemService;
 
-    @GetMapping(value = "/order")
-    public String createForm(Model model) {
-        List<Customer> members = customerService.getCustomers();
-        List<Item> items = itemService.getItems();
-        model.addAttribute("cusrs", members);
-        model.addAttribute("items", items);
-        return "order/orderForm";
+    @PostMapping()
+    public Order order(@RequestBody CreateOrderRequest createOrderRequest) {
+        return orderService.order(createOrderRequest.customerId(), createOrderRequest.itemId(), createOrderRequest.count());
     }
-    @PostMapping(value = "/order")
-    public String order(@RequestParam("memberId") Long memberId,
-                        @RequestParam("itemId") Long itemId, @RequestParam("count") int count) {
-        orderService.order(memberId, itemId, count);
-        return "redirect:/orders";
+    @GetMapping
+    public List<Order> showOrderList() {
+        return orderService.getOrders();
     }
-
+    @GetMapping("/{id}")
+    public Order showOrderById(@PathVariable("id") Long id) {
+        return orderService.getOrderById(id);
+    }
     @PostMapping(value = "/orders/{orderId}/cancel")
-    public String cancelOrder(@PathVariable("orderId") Long orderId) {
+    public void cancelOrder(@PathVariable("orderId") Long orderId) {
         orderService.cancelOrder(orderId);
-        return "redirect:/orders";
     }
 }
 

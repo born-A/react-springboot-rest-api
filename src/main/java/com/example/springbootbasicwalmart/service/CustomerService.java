@@ -40,9 +40,8 @@ public class CustomerService {
         return customerList;
     }
 
-    public void updateCustomer(Long id, String email, String password, String name, String city, String street, String zipcode) {
-        Optional<Customer> findCustomer = customerRepository.findById(id);
-        Customer customer = findCustomer.get();
+    public Customer updateCustomer(Long id, String email, String password, String name, String city, String street, String zipcode) {
+        Customer customer = customerRepository.findById(id).get();
         customer.setEmail(email);
         customer.setName(name);
         customer.setPassword(password);
@@ -50,6 +49,7 @@ public class CustomerService {
         customer.setStreet(street);
         customer.setZipcode(zipcode);
         customerRepository.save(customer);
+        return customer;
     }
 
 
