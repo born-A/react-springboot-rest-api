@@ -59,7 +59,6 @@ public class Order {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
-
     public void cancel() {
         this.setStatus(OrderStatus.CANCEL);
         for (OrderItem orderItem : orderItems) {

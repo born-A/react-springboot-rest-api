@@ -1,15 +1,14 @@
 package com.example.springbootbasicwalmart.controller;
 
 import com.example.springbootbasicwalmart.domain.customer.Customer;
-import com.example.springbootbasicwalmart.request.CreateCustomerRequest;
+import com.example.springbootbasicwalmart.controller.request.CreateCustomerRequest;
 import com.example.springbootbasicwalmart.service.CustomerService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -20,7 +19,9 @@ public class CustomerController {
 
     @PostMapping
     public Customer addNewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest) {
-        Customer customer = Customer.createCustomer(createCustomerRequest.email(), createCustomerRequest.password(), createCustomerRequest.name(), createCustomerRequest.city(),createCustomerRequest.street(),createCustomerRequest.zipcode());
+        Customer customer = Customer.createCustomer(createCustomerRequest.email(),
+                createCustomerRequest.password(), createCustomerRequest.name(),
+                createCustomerRequest.city(),createCustomerRequest.street(),createCustomerRequest.zipcode());
         Customer addNewCustomer = customerService.addNewCustomer(customer);
         return addNewCustomer;
     }
@@ -36,8 +37,11 @@ public class CustomerController {
     }
 
     @PostMapping("/update/{id}")
-    public Customer updateCustomer(@PathVariable("id") Long id,@RequestBody CreateCustomerRequest createCustomerRequest) {
-        return customerService.updateCustomer(id, createCustomerRequest.email(), createCustomerRequest.password(), createCustomerRequest.name(), createCustomerRequest.city(), createCustomerRequest.street(), createCustomerRequest.zipcode());
+    public Customer updateCustomer(@PathVariable("id") Long id,
+                                   @RequestBody CreateCustomerRequest createCustomerRequest) {
+        return customerService.updateCustomer(id, createCustomerRequest.email(), createCustomerRequest.password(),
+                createCustomerRequest.name(), createCustomerRequest.city(), createCustomerRequest.street(),
+                createCustomerRequest.zipcode());
     }
     @DeleteMapping("/delete/{id}")
     public void deleteCustomer(@PathVariable Long id){

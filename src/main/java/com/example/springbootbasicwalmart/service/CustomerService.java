@@ -27,10 +27,6 @@ public class CustomerService {
     }
 
 
-    public Optional<Customer> getCustomerByName(String name) {
-        return customerRepository.findByName(name);
-    }
-
     public List<Customer> getCustomers() {
         List<Customer> customerList = customerRepository.findAll();
         if (customerList.isEmpty()) {
