@@ -2,6 +2,7 @@ package com.example.springbootbasicwalmart.domain.item;
 
 import com.example.springbootbasicwalmart.domain.order.OrderItem;
 import com.example.springbootbasicwalmart.utils.ItemType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Item {
     private int price;
     private int quantity;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 

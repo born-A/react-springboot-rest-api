@@ -18,7 +18,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping()
+    @PostMapping
     public Customer addNewCustomer(@RequestBody CreateCustomerRequest createCustomerRequest) {
         Customer customer = Customer.createCustomer(createCustomerRequest.email(), createCustomerRequest.password(), createCustomerRequest.name(), createCustomerRequest.city(),createCustomerRequest.street(),createCustomerRequest.zipcode());
         Customer addNewCustomer = customerService.addNewCustomer(customer);

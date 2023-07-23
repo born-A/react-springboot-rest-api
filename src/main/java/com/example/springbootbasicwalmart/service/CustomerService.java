@@ -1,6 +1,5 @@
 package com.example.springbootbasicwalmart.service;
 
-import com.example.springbootbasicwalmart.domain.customer.Address;
 import com.example.springbootbasicwalmart.domain.customer.Customer;
 import com.example.springbootbasicwalmart.repository.CustomerRepository;
 import org.springframework.stereotype.Service;

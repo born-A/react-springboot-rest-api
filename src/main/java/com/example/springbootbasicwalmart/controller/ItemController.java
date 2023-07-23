@@ -22,7 +22,7 @@ public class ItemController {
         return List.of(ItemType.values());
     }
 
-    @PostMapping()
+    @PostMapping
     public Item addNewItem(@RequestBody CreateItemRequest createItemRequest) {
         Item item = Item.createItem(createItemRequest.itemType(), createItemRequest.price(), createItemRequest.quantity());
         Item newItem = itemService.addNewItem(item);

@@ -1,6 +1,7 @@
 package com.example.springbootbasicwalmart.domain.customer;
 
 import com.example.springbootbasicwalmart.domain.order.Order;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -30,6 +31,7 @@ public class Customer {
     private String street;
     private String zipcode;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Order> orders = new ArrayList<>();
     public static Customer createCustomer(String email, String password, String name, String city,String street, String zipcode) {
