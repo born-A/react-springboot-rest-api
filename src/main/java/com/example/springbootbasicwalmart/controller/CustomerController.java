@@ -72,7 +72,7 @@ public class CustomerController {
         customerService.updateCustomer(id,customerForm.getEmail(), customerForm.getPassword(),customerForm.getName(), customerForm.getCity(), customerForm.getStreet(), customerForm.getZipcode());
         return "redirect:/";
     }
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     public String deleteCustomer(@RequestParam Long id){
         customerService.deleteCustomerById(id);
         return "redirect:/";

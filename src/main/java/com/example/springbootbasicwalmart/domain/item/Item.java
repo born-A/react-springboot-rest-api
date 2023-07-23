@@ -1,13 +1,16 @@
 package com.example.springbootbasicwalmart.domain.item;
 
-public abstract class Item {
+import com.example.springbootbasicwalmart.utils.ItemType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter@Setter
+@AllArgsConstructor
+public class Item {
 
     private Long id;
-    private String name;
+    private ItemType itemType;
     private Long price;
-    private Long amount;
-    private boolean status;
-
-    protected Item() {
-    }
+    private Long quantity;
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:object="${customer}">
+    <h5 class="fw-normal user-select-all mb-0"><a th:href="@{/customers/update/{id}(id = ${customer.get().getId()})}">수정하기</a></h5>
+<br>
+    <h5 class="fw-normal user-select-all mb-0"><a th:href="@{/customers/delete(id=${customer.get().getId()})}">삭제하기</a></h5>
+</div>
+</body>
+</html>
