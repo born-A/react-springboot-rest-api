@@ -1,7 +1,6 @@
 package com.example.springbootbasicwalmart.controller;
 
 import com.example.springbootbasicwalmart.domain.item.Item;
-import com.example.springbootbasicwalmart.factory.ItemFactory;
 import com.example.springbootbasicwalmart.request.CreateItemRequest;
 import com.example.springbootbasicwalmart.service.ItemService;
 import com.example.springbootbasicwalmart.utils.ItemType;
@@ -25,7 +24,7 @@ public class ItemController {
 
     @PostMapping("/")
     public Item addNewItem(@RequestBody CreateItemRequest createItemRequest) {
-        Item item = ItemFactory.createItem(createItemRequest.itemType(), createItemRequest.price(), createItemRequest.quantity());
+        Item item = Item.createItem(createItemRequest.itemType(), createItemRequest.price(), createItemRequest.quantity());
         Item newItem = itemService.addNewItem(item);
         return newItem;
     }

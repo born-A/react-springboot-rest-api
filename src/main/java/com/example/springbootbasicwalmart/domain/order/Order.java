@@ -31,6 +31,16 @@ public class Order {
     private LocalDateTime orderDate;
 
     private OrderStatus status;
+    public static Order createOrder(Customer customer, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setCustomer(customer);
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -39,5 +49,12 @@ public class Order {
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
+    }
+
+    public void cancel() {
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
     }
 }

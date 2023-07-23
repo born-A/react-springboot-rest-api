@@ -1,12 +1,17 @@
 package com.example.springbootbasicwalmart.domain.customer;
 
+import com.example.springbootbasicwalmart.domain.order.Order;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter@Setter
 @AllArgsConstructor
@@ -25,6 +30,8 @@ public class Customer {
     private String street;
     private String zipcode;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders = new ArrayList<>();
     public static Customer createCustomer(String email, String password, String name, String city,String street, String zipcode) {
         return getCustomer(email, password, name, city, street, zipcode);
     }
