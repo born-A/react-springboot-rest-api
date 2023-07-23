@@ -35,20 +35,20 @@ public class ItemController {
     }
 
     @GetMapping("/{item-type}")
-    public List<Item> findByItemType(@RequestParam("item-type") String itemType) {
+    public List<Item> findByItemType(@PathVariable("item-type") String itemType) {
         List<Item> itemsByType = itemService.getItemsByType(itemType);
         return itemsByType;
     }
 
 
-    @GetMapping("/{item-id}")
-    public Item viewItem(@RequestParam("item-id") Long itemId) {
+    @GetMapping("/view/{item-id}")
+    public Item viewItem(@PathVariable("item-id") Long itemId) {
         return itemService.getItemsById(itemId);
     }
 
 
-    @DeleteMapping("/{item-id}")
-    public void deleteItem(@RequestParam("item-id") Long itemId) {
+    @GetMapping("/delete/{item-id}")
+    public void deleteItem( @PathVariable("item-id") Long itemId) {
         itemService.deleteById(itemId);
     }
 }

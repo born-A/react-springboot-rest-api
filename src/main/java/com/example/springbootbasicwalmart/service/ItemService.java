@@ -25,7 +25,7 @@ public class ItemService {
     }
 
     public List<Item> getItemsByType(String ItemType) {
-        return itemRepository.findByType(ItemType);
+        return itemRepository.findByItemType(ItemType);
     }
 
     public void deleteById(Long itemId) {

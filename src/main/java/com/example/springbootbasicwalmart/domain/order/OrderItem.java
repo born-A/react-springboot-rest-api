@@ -2,13 +2,17 @@ package com.example.springbootbasicwalmart.domain.order;
 
 import com.example.springbootbasicwalmart.domain.item.Item;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "order_item")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue

@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Random;
 @Getter@Setter
 @AllArgsConstructor
 @Entity
+@NoArgsConstructor
 public class Item {
 
     @Id
